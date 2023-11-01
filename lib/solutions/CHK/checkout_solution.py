@@ -43,7 +43,9 @@ def checkout(skus):
         if item not in price_info:
             return -1
     basket_summary = remove_free_items(basket_summary,price_info)
+    print('before' ,basket_summary)
     basket_summary, number_group_offers = remove_group_items(basket_summary,price_info)
+    print('after' ,basket_summary)
     basket_price = 45 * number_group_offers
 
     for item, count in basket_summary.items():
@@ -75,7 +77,7 @@ def remove_group_items(item_counter,price_info):
     total_group_item_count = sum(group_items_count.values())
     number_of_group_offers = total_group_item_count // 3
 
-    for _ in range(number_of_group_offers):
+    for _ in range(total_group_item_count):
         for item in sorted_group_items:
             if item_counter[item] > 0:
                 item_counter[item] -= 1
@@ -133,7 +135,7 @@ def get_optimal_price_for_item(item, count,price, offer_list,price_info):
 
     return best_price
 
-basket = ['S']*3
+basket = ['S']*3+['X']
 print(checkout(basket))
 
 
