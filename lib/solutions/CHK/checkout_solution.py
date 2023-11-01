@@ -47,7 +47,7 @@ def remove_free_items(item_counter,price_info):
                         new_counter[item] += count
                     else:
                         number_of_free_items= (count // offer['buy']) * offer['get']
-                        new_counter[free_item] -= number_of_free_items
+                        new_counter[free_item] = count - number_of_free_items
 
 
                 else:
@@ -85,8 +85,6 @@ def get_optimal_price_for_item(item, count,price, offer_list,price_info):
 
     return best_price
 
-basket = ['F']*3
-print(checkout(basket))
 
 
 
