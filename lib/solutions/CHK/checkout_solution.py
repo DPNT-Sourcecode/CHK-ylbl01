@@ -137,6 +137,3 @@ def get_optimal_price_for_item(item, count,price, offer_list,price_info):
 
 basket = ['S']*3+['X']
 print(checkout(basket))
-
-
-
