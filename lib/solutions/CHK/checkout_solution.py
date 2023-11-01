@@ -38,8 +38,6 @@ def get_optimal_price_for_item(item, count,price, offer_list,price_info):
     print('count' , count)
     print(price)
     print(offer_list)
-    if count == 0:
-        return 0
     best_price = count * price
     for i in range(len(offer_list)):
         offer = offer_list[i]
@@ -74,6 +72,7 @@ price_info = {
     'D': {'price':15, 'offer':None},
     'E': {'price':60, 'offer':[{'type':'buy_x_get_free','buy':2,'get':1,'free_item':'B'}]}
 }
-offer_list = [{'type':'buy_x_get_free','buy':2,'get':1,'free_item':'B'}]
-print(get_optimal_price_for_item("E",9,60,offer_list,price_info))
+#offer_list = [{'type':'buy_x_get_free','buy':2,'get':1,'free_item':'B'}]
+offer_list = [{'type': 'multibuy', 'quantity': 2, 'discounted_price': 45}]
+print(get_optimal_price_for_item("B",4,30,offer_list,price_info))
 
