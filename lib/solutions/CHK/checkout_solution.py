@@ -13,6 +13,7 @@ def checkout(skus):
         'C': {'price':20, 'offer':None},
         'D': {'price':15, 'offer':None},
         'E': {'price':40, 'offer':[{'type':'buy_x_get_free','buy':2,'get':1,'free_item':'B'}]}
+        'F': {'price':10, 'offer':[{'type':'buy_x_get_free','buy':2,'get':1,'free_item':'F'}]}
     }
     basket_summary = Counter(skus)
     for item, count in basket_summary.items():
@@ -74,6 +75,7 @@ def get_optimal_price_for_item(item, count,price, offer_list,price_info):
             best_price = min(best_price,current_price)
 
     return best_price
+
 
 
 
