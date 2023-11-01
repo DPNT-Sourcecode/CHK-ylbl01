@@ -31,17 +31,18 @@ def checkout(skus):
 
 def remove_free_items(item_counter,price_info):
     new_counter = defaultdict(int)
+    print(item_counter)
     for item, count in item_counter.items():
 
         offer = price_info[item]['offer'][0] #item['offer'][0]
         if offer['type'] == 'buy_x_get_free':
             free_item = offer['free_item']
             number_of_free_items= (count // offer['buy']) * offer['get']
-            new_counter[free_item] = new_counter[free_item]-number_of_free_items
+            new_counter[free_item] -= number_of_free_items
         else:
             new_counter[item] = count
     print(new_counter)
-    for key, value in new_counter.values():
+    for key, value in new_counter.items():
         if value < 0:
             new_counter[key] = 0
     return new_counter
@@ -77,5 +78,6 @@ def get_optimal_price_for_item(item, count,price, offer_list,price_info):
 
 basket = ['E','E']
 print(checkout(basket))
+
 
 
