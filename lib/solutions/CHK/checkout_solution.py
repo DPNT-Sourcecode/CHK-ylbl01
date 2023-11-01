@@ -75,13 +75,14 @@ def remove_group_items(item_counter,price_info):
     sorted_group_items = sorted(group_items_count.keys(), key=lambda item: group_prices[item], reverse=True)
 
     total_group_item_count = sum(group_items_count.values())
-    number_of_group_offers = total_group_item_count // 3
+    number_group_offers = total_group_item_count // 3
+    items_to_deduct = (total_group_item_count // 3) * 3
 
-    for _ in range(total_group_item_count):
-        for item in sorted_group_items:
-            if item_counter[item] > 0:
-                item_counter[item] -= 1
-    return item_counter , number_of_group_offers
+    for item in sorted_group_items:
+        while item_counter[item] > 0 and items_to_deduct > 0:
+            item_counter[item] -= 1
+            items_to_deduct -= 1
+    return item_counter , number_group_offers
 
 def remove_free_items(item_counter,price_info):
     new_counter = defaultdict(int)
@@ -134,6 +135,3 @@ def get_optimal_price_for_item(item, count,price, offer_list,price_info):
             best_price = min(best_price,current_price)
 
     return best_price
-
-basket = ['S']*3+['X']
-print(checkout(basket))
