@@ -3,6 +3,9 @@
 # skus = unicode string
 
 from collections import Counter
+from collections import defaultdict
+
+
 def checkout(skus):
     price_info = {
         'A': {'price':50, 'offer':[{'type':'multibuy', 'quantity':3,'discounted_price':130},{'type':'multibuy', 'quantity':5,'discounted_price':200}]},
@@ -12,6 +15,7 @@ def checkout(skus):
         'E': {'price':40, 'offer':[{'type':'buy_x_get_free','buy':2,'get':1,'free_item':'B'}]}
     }
     basket_summary = Counter(skus)
+    basket_summary = remove_free_items(basket_summary)
     basket_price = 0
     for item, count in basket_summary.items():
         if item in price_info:
@@ -24,6 +28,19 @@ def checkout(skus):
         else:
             return -1
     return basket_price
+
+def remove_free_items(item_counter):
+    new_counter = defaultdict(int)
+    for item, count in item_counter.items():
+        offer = item['offer'][0]
+        if offer['type']=='buy_x_get_free':
+            free_item = offer['free_item']
+            number_of_free_items= (count // offer['buy']) * offer['get']
+            new_counter[free_item] = new_counter[free_item]-number_of_free_items
+        else:
+            new_counter[item] = count
+    for key, value in new_counter.values():
+        if 
 
 def get_optimal_price_for_item(item, count,price, offer_list,price_info):
 
@@ -53,4 +70,5 @@ def get_optimal_price_for_item(item, count,price, offer_list,price_info):
 
 
     return best_price
+
 
