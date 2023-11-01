@@ -71,5 +71,3 @@ def get_optimal_price_for_item(item, count,price, offer_list,price_info):
 
     return best_price
 
-basket = ['C']
-print(checkout(basket))
