@@ -50,9 +50,20 @@ def get_optimal_price_for_item(item, count,price, offer_list,price_info):
             offer_instances = count // offer['buy']
             offer_leftover = count % offer['buy']
             current_price += count * price
-            current_price += offer_instances*offer['get']*price_info.
+            current_price += offer_instances*offer['get']*price_info[offer['free_item']['price']]
+            best_price = min(best_price,current_price)
 
+    return best_price
 
+price_info = {
+    'A': {'price':50, 'offer':[{'type':'multibuy', 'quantity':3,'discounted_price':130},{'type':'multibuy', 'quantity':5,'discounted_price':200}]},
+    'B': {'price':30, 'offer':[{'type':'multibuy','quantity':2,'discounted_price':45}]},
+    'C': {'price':20, 'offer':None},
+    'D': {'price':15, 'offer':None},
+    'E': {'price':60, 'offer':[{'type':'buy_x_get_free','buy':2,'get':1,'free_item':'B'}]}
+}
+offer_list = [{'type':'multibuy', 'quantity':3,'discounted_price':130},{'type':'multibuy', 'quantity':5,'discounted_price':200}]
+print(get_optimal_price_for_item("A",9,50,offer_list,price_info))
 
 
 
