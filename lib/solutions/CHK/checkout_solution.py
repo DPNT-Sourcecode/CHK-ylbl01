@@ -19,7 +19,7 @@ def checkout(skus):
         'H': {'price':10, 'offer':[{'type':'multibuy', 'quantity':5,'discounted_price':45},{'type':'multibuy', 'quantity':10,'discounted_price':80}]},
         'I': {'price':35, 'offer':None},
         'J': {'price':60, 'offer':None},
-        'K': {'price':80, 'offer':[{'type':'multibuy','quantity':2,'discounted_price':150}]},
+        'K': {'price':70, 'offer':[{'type':'multibuy','quantity':2,'discounted_price':150}]},
         'L': {'price':90, 'offer':None},
         'M': {'price':15, 'offer':None},
         'N': {'price':40, 'offer':[{'type':'buy_x_get_free','buy':3,'get':1,'free_item':'M'}]},
