@@ -28,8 +28,7 @@ def checkout(skus):
     return basket_price
 
 
-basket = ['A', 'A', 'A', 'A', 'B', 'B', 'C', 'E']
-print(checkout(basket))
+
 
 
 
