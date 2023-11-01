@@ -44,7 +44,7 @@ def checkout(skus):
             return -1
     basket_summary = remove_free_items(basket_summary,price_info)
     basket_summary, number_group_offers = remove_group_items(basket_summary,price_info)
-    basket_price = 0
+    basket_price = 45 * number_group_offers
 
     for item, count in basket_summary.items():
         if item in price_info:
@@ -58,8 +58,28 @@ def checkout(skus):
             return -1
     return basket_price
 
+def extract_group_offer_items(price_info):
+    extracted_prices = {}
+    for item, details in price_info.items():
+        if details['offer'] and any(offer['type']=='group' for offer in details['offer']):
+            extracted_prices[item] = details['prices']
+    return extracted_prices
+
 def remove_group_items(item_counter,price_info):
-    group_items=
+    group_prices = extract_group_offer_items(price_info)
+    group_items = list(group_prices.keys())
+
+    group_items_count = {item: item_counter[item] for item in group_items if item in item_counter}
+    sorted_group_items = sorted(group_items_count.keys(), key=lambda items: group_prices[item], reverse=True)
+
+    total_group_item_count = sum(group_items_count.values())
+    number_of_group_offers = total_group_item_count // 3
+
+    for _ in range(number_of_group_offers):
+        for item in sorted_group_items:
+            if item_counter[item] > 0:
+                item_counter -= 1
+    return item_counter , number_of_group_offers
 
 def remove_free_items(item_counter,price_info):
     new_counter = defaultdict(int)
@@ -112,5 +132,6 @@ def get_optimal_price_for_item(item, count,price, offer_list,price_info):
             best_price = min(best_price,current_price)
 
     return best_price
+
 
 
