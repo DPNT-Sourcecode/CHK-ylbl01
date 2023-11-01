@@ -1,6 +1,9 @@
 
 # noinspection PyUnusedLocal
 # skus = unicode string
+
+from collections import Counter
+
 def checkout(skus):
     price_info = {
         'A': {'price':150, 'offer':{'quantity':3,'discounted_price':130}},
@@ -8,8 +11,15 @@ def checkout(skus):
         'C': {'price':20, 'offer':None},
         'D': {'price':15, 'offer':None}
     }
-    basket_summary = 
-    for item, detail in price_info.items():
+    basket_summary = Counter(skus)
+    for item, count in basket_summary.items():
+        if item in price_info:
+            details = price_info[item]
+            if details.offer:
+        else:
+            return -1
+
+
 
 
 
