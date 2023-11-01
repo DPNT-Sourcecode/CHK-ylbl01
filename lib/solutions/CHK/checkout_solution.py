@@ -6,6 +6,7 @@ from collections import Counter
 from collections import defaultdict
 
 
+
 def checkout(skus):
     price_info = {
         'A': {'price':50, 'offer':[{'type':'multibuy', 'quantity':3,'discounted_price':130},{'type':'multibuy', 'quantity':5,'discounted_price':200}]},
@@ -13,8 +14,30 @@ def checkout(skus):
         'C': {'price':20, 'offer':None},
         'D': {'price':15, 'offer':None},
         'E': {'price':40, 'offer':[{'type':'buy_x_get_free','buy':2,'get':1,'free_item':'B'}]},
-        'F': {'price':10, 'offer':[{'type':'buy_x_get_free','buy':2,'get':1,'free_item':'F'}]}
+        'F': {'price':10, 'offer':[{'type':'buy_x_get_free','buy':2,'get':1,'free_item':'F'}]},
+        'G': {'price':20, 'offer':None},
+        'H': {'price':10, 'offer':[{'type':'multibuy', 'quantity':5,'discounted_price':45},{'type':'multibuy', 'quantity':10,'discounted_price':80}]},
+        'I': {'price':35, 'offer':None},
+        'J': {'price':60, 'offer':None},
+        'K': {'price':80, 'offer':[{'type':'multibuy','quantity':2,'discounted_price':150}]},
+        'L': {'price':90, 'offer':None},
+        'M': {'price':15, 'offer':None},
+        'N': {'price':40, 'offer':[{'type':'buy_x_get_free','buy':3,'get':1,'free_item':'M'}]},
+        'O': {'price':10, 'offer':None},
+        'P': {'price':50, 'offer':[{'type':'multibuy','quantity':5,'discounted_price':200}]},
+        'Q': {'price':30, 'offer':[{'type':'multibuy','quantity':3,'discounted_price':80}]},
+        'R': {'price':50, 'offer':[{'type':'buy_x_get_free','buy':3,'get':1,'free_item':'Q'}]},
+        'S': {'price':30, 'offer':None},
+        'T': {'price':20, 'offer':None},
+        'U': {'price':40, 'offer':[{'type':'buy_x_get_free','buy':3,'get':1,'free_item':'U'}]},
+        'V': {'price':50, 'offer':[{'type':'multibuy', 'quantity':2,'discounted_price':90},{'type':'multibuy', 'quantity':3,'discounted_price':130}]},
+        'W': {'price':20, 'offer':None},
+        'X': {'price':90, 'offer':None},
+        'Y': {'price':10, 'offer':None},
+        'Z': {'price':50, 'offer':None},
     }
+
+
     basket_summary = Counter(skus)
     for item, count in basket_summary.items():
         if item not in price_info:
@@ -85,4 +108,5 @@ def get_optimal_price_for_item(item, count,price, offer_list,price_info):
             best_price = min(best_price,current_price)
 
     return best_price
+
 
