@@ -33,6 +33,18 @@ def checkout(skus):
             return -1
     return basket_price
 
+def get_optimal_price_for_item(item, count,price, offer_list):
+    best_price = count * price
+    for i in range(len(offer_list)):
+        offer = offer_list[i]
+        current_price = 0
+        if offer['type'] == 'multibuy' and count >= offer['quantity']:
+            multibuy_instances = count // offer['quantity']
+            multibuy_leftover = count % offer['quantity']
+            multibuy_price = multibuy_instances * offer['discounted_price']
+            remaining_offer_list
+            left_over_optimal_price = get_optimal_price_for_item(item,multibuy_leftover,price,offer_list[])
+
 
 
 
