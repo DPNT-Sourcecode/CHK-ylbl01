@@ -27,14 +27,14 @@ def checkout(skus):
         'P': {'price':50, 'offer':[{'type':'multibuy','quantity':5,'discounted_price':200}]},
         'Q': {'price':30, 'offer':[{'type':'multibuy','quantity':3,'discounted_price':80}]},
         'R': {'price':50, 'offer':[{'type':'buy_x_get_free','buy':3,'get':1,'free_item':'Q'}]},
-        'S': {'price':30, 'offer':None},
-        'T': {'price':20, 'offer':None},
+        'S': {'price':20, 'offer':[{'type':'group','quantity':3,'discounted_price':45}]},
+        'T': {'price':20, 'offer':[{'type':'group','quantity':3,'discounted_price':45}]},
         'U': {'price':40, 'offer':[{'type':'buy_x_get_free','buy':3,'get':1,'free_item':'U'}]},
         'V': {'price':50, 'offer':[{'type':'multibuy', 'quantity':2,'discounted_price':90},{'type':'multibuy', 'quantity':3,'discounted_price':130}]},
         'W': {'price':20, 'offer':None},
-        'X': {'price':90, 'offer':None},
-        'Y': {'price':10, 'offer':None},
-        'Z': {'price':50, 'offer':None},
+        'X': {'price':17, 'offer':[{'type':'group','quantity':3,'discounted_price':45}]},
+        'Y': {'price':20, 'offer':[{'type':'group','quantity':3,'discounted_price':45}]},
+        'Z': {'price':21, 'offer':[{'type':'group','quantity':3,'discounted_price':45}]},
     }
 
 
@@ -43,6 +43,7 @@ def checkout(skus):
         if item not in price_info:
             return -1
     basket_summary = remove_free_items(basket_summary,price_info)
+    basket_summary = remove_group_items(basket_summary,price_info)
     basket_price = 0
 
     for item, count in basket_summary.items():
@@ -56,6 +57,9 @@ def checkout(skus):
         else:
             return -1
     return basket_price
+
+def remove_group_items(item_counter,price_info):
+
 
 def remove_free_items(item_counter,price_info):
     new_counter = defaultdict(int)
@@ -108,5 +112,6 @@ def get_optimal_price_for_item(item, count,price, offer_list,price_info):
             best_price = min(best_price,current_price)
 
     return best_price
+
 
 
