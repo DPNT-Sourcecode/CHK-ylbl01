@@ -62,7 +62,7 @@ def extract_group_offer_items(price_info):
     extracted_prices = {}
     for item, details in price_info.items():
         if details['offer'] and any(offer['type']=='group' for offer in details['offer']):
-            extracted_prices[item] = details['prices']
+            extracted_prices[item] = details['price']
     return extracted_prices
 
 def remove_group_items(item_counter,price_info):
@@ -70,7 +70,7 @@ def remove_group_items(item_counter,price_info):
     group_items = list(group_prices.keys())
 
     group_items_count = {item: item_counter[item] for item in group_items if item in item_counter}
-    sorted_group_items = sorted(group_items_count.keys(), key=lambda items: group_prices[item], reverse=True)
+    sorted_group_items = sorted(group_items_count.keys(), key=lambda item: group_prices[item], reverse=True)
 
     total_group_item_count = sum(group_items_count.values())
     number_of_group_offers = total_group_item_count // 3
@@ -133,5 +133,7 @@ def get_optimal_price_for_item(item, count,price, offer_list,price_info):
 
     return best_price
 
+basket = ['S']*3
+print(checkout(basket))
 
 
