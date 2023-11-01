@@ -32,6 +32,7 @@ def checkout(skus):
 def remove_free_items(item_counter):
     new_counter = defaultdict(int)
     for item, count in item_counter.items():
+        print(item)
         offer = item['offer'][0]
         if offer['type']=='buy_x_get_free':
             free_item = offer['free_item']
@@ -40,7 +41,9 @@ def remove_free_items(item_counter):
         else:
             new_counter[item] = count
     for key, value in new_counter.values():
-        if 
+        if value < 0:
+            new_counter[key] = 0
+    return new_counter
 
 def get_optimal_price_for_item(item, count,price, offer_list,price_info):
 
@@ -60,15 +63,17 @@ def get_optimal_price_for_item(item, count,price, offer_list,price_info):
                 left_over_optimal_price = 0
             current_price = multibuy_price + left_over_optimal_price
             best_price = min(best_price,current_price)
-        elif offer['type'] == 'buy_x_get_free' and count >= offer['buy']:
-            offer_instances = count // offer['buy']
-            free_item = price_info[offer['free_item']]
-            number_free_items = offer_instances*offer['get']
-            leftover_value = get_optimal_price_for_item(free_item,number_free_items,free_item['price'],free_item.get('offer',[]),price_info)
-            best_price = count * price + leftover_value
+        # elif offer['type'] == 'buy_x_get_free' and count >= offer['buy']:
+        #     offer_instances = count // offer['buy']
+        #     free_item = price_info[offer['free_item']]
+        #     number_free_items = offer_instances*offer['get']
+        #     leftover_value = get_optimal_price_for_item(free_item,number_free_items,free_item['price'],free_item.get('offer',[]),price_info)
+        #     best_price = count * price + leftover_value
 
 
 
     return best_price
 
+basket = ['E','E']
+print(checkout(basket))
 
