@@ -66,19 +66,5 @@ def get_optimal_price_for_item(item, count,price, offer_list,price_info):
                 left_over_optimal_price = 0
             current_price = multibuy_price + left_over_optimal_price
             best_price = min(best_price,current_price)
-        # elif offer['type'] == 'buy_x_get_free' and count >= offer['buy']:
-        #     offer_instances = count // offer['buy']
-        #     free_item = price_info[offer['free_item']]
-        #     number_free_items = offer_instances*offer['get']
-        #     leftover_value = get_optimal_price_for_item(free_item,number_free_items,free_item['price'],free_item.get('offer',[]),price_info)
-        #     best_price = count * price + leftover_value
-
-
 
     return best_price
-
-basket = ['E','E','B']
-print(checkout(basket))
-
-
-
