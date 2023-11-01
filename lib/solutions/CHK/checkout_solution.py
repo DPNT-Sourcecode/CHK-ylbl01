@@ -135,4 +135,3 @@ def get_optimal_price_for_item(item, count,price, offer_list,price_info):
             best_price = min(best_price,current_price)
 
     return best_price
-
