@@ -78,7 +78,7 @@ def remove_group_items(item_counter,price_info):
     for _ in range(number_of_group_offers):
         for item in sorted_group_items:
             if item_counter[item] > 0:
-                item_counter -= 1
+                item_counter[item] -= 1
     return item_counter , number_of_group_offers
 
 def remove_free_items(item_counter,price_info):
@@ -135,5 +135,6 @@ def get_optimal_price_for_item(item, count,price, offer_list,price_info):
 
 basket = ['S']*3
 print(checkout(basket))
+
 
 
