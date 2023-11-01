@@ -17,7 +17,7 @@ def checkout(skus):
         if item in price_info:
             details = price_info[item]
             best_price = count * details['price']
-            for offer in details.get('offers',[]):
+            for offer in details.get('offer',[]):
                 if offer['type'] == 'multibuy' and count >= offer['quantity']:
                     multibuy_instances = count // offer['quantity']
                     multibuy_leftover = count % details['offer']['quantity']
@@ -49,8 +49,10 @@ def get_optimal_price_for_item(item, count,price, offer_list,price_info):
         elif offer['type'] == 'buy_x_get_free' and count >= offer['buy']:
             offer_instances = count // offer['buy']
             offer_leftover = count % offer['buy']
+            free_item = price_info[offer['free_item']]
+            leftover_value = get_optimal_price_for_item(free_item,offer_leftover,free_item['price'],free_item.get('offer',[]),price_info)
             current_price += count * price
-            current_price += offer_instances*offer['get']*price_info[offer['free_item']['price']]
+            current_price += leftover_value#offer_instances*offer['get']*price_info[offer['free_item']['price']]
             best_price = min(best_price,current_price)
 
     return best_price
@@ -63,7 +65,7 @@ price_info = {
     'E': {'price':60, 'offer':[{'type':'buy_x_get_free','buy':2,'get':1,'free_item':'B'}]}
 }
 offer_list = [{'type':'multibuy', 'quantity':3,'discounted_price':130},{'type':'multibuy', 'quantity':5,'discounted_price':200}]
-print(get_optimal_price_for_item("A",9,50,offer_list,price_info))
+print(get_optimal_price_for_item("E",9,50,offer_list,price_info))
 
 
 
