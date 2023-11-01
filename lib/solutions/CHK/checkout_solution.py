@@ -5,8 +5,8 @@
 from collections import Counter
 def checkout(skus):
     price_info = {
-        'A': {'price':50, 'offer':{'quantity':3,'discounted_price':130}},
-        'B': {'price':30, 'offer':{'quantity':2,'discounted_price':45}},
+        'A': {'price':50, 'offer':[{'type':'multibuy', 'quantity':3,'discounted_price':130},{'type':'multibuy', 'quantity':5,'discounted_price':200}},
+        'B': [{'price':30, 'offer':{'quantity':2,'discounted_price':45}}],
         'C': {'price':20, 'offer':None},
         'D': {'price':15, 'offer':None}
     }
@@ -26,6 +26,7 @@ def checkout(skus):
         else:
             return -1
     return basket_price
+
 
 
 
