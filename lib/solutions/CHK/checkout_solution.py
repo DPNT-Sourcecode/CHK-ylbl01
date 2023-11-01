@@ -42,9 +42,15 @@ def get_optimal_price_for_item(item, count,price, offer_list):
             multibuy_instances = count // offer['quantity']
             multibuy_leftover = count % offer['quantity']
             multibuy_price = multibuy_instances * offer['discounted_price']
-            remaining_offer_list
-            left_over_optimal_price = get_optimal_price_for_item(item,multibuy_leftover,price,offer_list[])
-
+            remaining_offer_list = offer_list[:i] + offer_list[i+1:]
+            left_over_optimal_price = get_optimal_price_for_item(item,multibuy_leftover,price,remaining_offer_list)
+            current_price = multibuy_price + left_over_optimal_price
+            best_price = min(best_price,current_price)
+        elif offer['type'] == 'buy_x_get_free' and count >= offer['buy']:
+            offer_instances = count // offer['buy']
+            offer_leftover = count % offer['buy']
+            current_price += count * price
+            current_price += offer_instances
 
 
 
