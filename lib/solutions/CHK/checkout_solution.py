@@ -15,9 +15,10 @@ def checkout(skus):
     for item, count in basket_summary.items():
         if item in price_info:
             details = price_info[item]
-            if details.offer:
+            if details['offer'] and count >= details['offer'][]
         else:
             return -1
+
 
 
 
