@@ -46,7 +46,8 @@ def remove_free_items(item_counter,price_info):
                     if count <= offer['buy']:
                         new_counter[item] += count
                     else:
-                        number_of_free_items= (count // offer['buy']) * offer['get']
+
+                        number_of_free_items= ((count-1) // offer['buy']) * offer['get']
                         new_counter[free_item] = count - number_of_free_items
 
 
