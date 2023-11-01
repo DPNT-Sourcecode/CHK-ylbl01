@@ -18,6 +18,9 @@ def checkout(skus):
             details = price_info[item]
             best_price = count * details['price']
             for offer in details.get('offers',[]):
+                if offer['type'] == 'multibuy' and count >= offer['quantity']:
+                    multibuy_instances = count // offer['quantity']
+                    multibuy_leftover = count % details['offer']['quantity']
             if details['offer'] and count >= details['offer']['quantity']:
                 multibuy_instances = count // details['offer']['quantity']
                 multibuy_leftover = count % details['offer']['quantity']
@@ -29,6 +32,7 @@ def checkout(skus):
         else:
             return -1
     return basket_price
+
 
 
 
