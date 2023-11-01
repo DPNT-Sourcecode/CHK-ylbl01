@@ -12,15 +12,25 @@ def checkout(skus):
         'D': {'price':15, 'offer':None}
     }
     basket_summary = Counter(skus)
+    basket_price = 0
     for item, count in basket_summary.items():
         if item in price_info:
             details = price_info[item]
-            if details['offer'] and count >= details['offer'][]
+            if details['offer'] and count >= details['offer']['quantity']:
+                multibuy_instances = count // details['offer']['quantity']
+                multibuy_leftover = count % details['offer']['quantity']
+                basket_price += multibuy_instances * details['offer']['discounted_price']
+                basket_price += multibuy_leftover * details['price']
+            else:
+                basket_price += count * details['price']
+
         else:
             return -1
+    return basket_price
 
 
-
+basket = ['A', 'A', 'A', 'A', 'B', 'B', 'C']
+print(checkout(basket))
 
 
 
