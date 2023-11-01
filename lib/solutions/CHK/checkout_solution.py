@@ -18,6 +18,9 @@ def checkout(skus):
     basket_summary = remove_free_items(basket_summary,price_info)
     basket_price = 0
     for item, count in basket_summary.items():
+        if item not in price_info:
+            return -1
+    for item, count in basket_summary.items():
         if item in price_info:
             details = price_info[item]
             if details['offer'] == None:
@@ -70,4 +73,5 @@ def get_optimal_price_for_item(item, count,price, offer_list,price_info):
             best_price = min(best_price,current_price)
 
     return best_price
+
 
