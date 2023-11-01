@@ -34,6 +34,11 @@ def checkout(skus):
     return basket_price
 
 def get_optimal_price_for_item(item, count,price, offer_list,price_info):
+    print(item)
+    print(count)
+    print(price)
+    print(offer_list)
+
     best_price = count * price
     for i in range(len(offer_list)):
         offer = offer_list[i]
@@ -50,7 +55,8 @@ def get_optimal_price_for_item(item, count,price, offer_list,price_info):
             offer_instances = count // offer['buy']
             offer_leftover = count % offer['buy']
             free_item = price_info[offer['free_item']]
-            leftover_value = get_optimal_price_for_item(free_item,offer_instances,free_item['price'],free_item.get('offer',[]),price_info)
+            number_free_items = offer_instances*offer['get']
+            leftover_value = get_optimal_price_for_item(free_item,number_free_items,free_item['price'],free_item.get('offer',[]),price_info)
             current_price += count * price
             current_price += leftover_value#offer_instances*offer['get']*price_info[offer['free_item']['price']]
             best_price = min(best_price,current_price)
